@@ -1,12 +1,76 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Парикмахерская</title>
+    <title>LUNA — Парикмахерская</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Название нашей парикмахерской</h1>
-    <p>Красота начинается с заботы о себе</p>
+
+    <!-- Шапка сайта -->
+    <header class="header">
+        <a href="index.html" class="logo">LUNA</a>
+
+        <div class="header-contacts">
+            <a href="tel:+79001234343">+7 900 123-43-43</a>
+            <button id="booking-button">Записаться</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Главный экран -->
+        <section class="hero">
+            <h1>Твоя красота начинается с заботы о себе.</h1>
+
+            <p>
+                LUNA — пространство красоты и уюта, где профессиональные
+                мастера помогут создать образ, подчеркнуть индивидуальность
+                и подарить волосам новый вид.
+            </p>
+
+            <a href="services.html" class="services-button">
+                Наши услуги
+            </a>
+        </section>
+
+        <!-- Галерея работ -->
+        <section class="gallery">
+            <h2>Наши работы</h2>
+
+            <div class="gallery-grid">
+                <button class="gallery-item" aria-label="Открыть фотографию 1"></button>
+                <button class="gallery-item" aria-label="Открыть фотографию 2"></button>
+                <button class="gallery-item" aria-label="Открыть фотографию 3"></button>
+                <button class="gallery-item" aria-label="Открыть фотографию 4"></button>
+                <button class="gallery-item" aria-label="Открыть фотографию 5"></button>
+                <button class="gallery-item" aria-label="Открыть фотографию 6"></button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <p>© LUNA — пространство красоты</p>
+    </footer>
+
+    <!-- Окно записи -->
+    <div class="booking-modal" id="booking-modal" hidden>
+        <div class="booking-content">
+            <button class="close-booking" id="close-booking">×</button>
+            <h2>Запись в LUNA</h2>
+            <p>Свяжитесь с нами удобным способом:</p>
+            <a href="tel:+79001234343">Позвонить</a>
+            <a href="https://wa.me/79001234343">WhatsApp</a>
+        </div>
+    </div>
+
+    <!-- Увеличенная фотография -->
+    <div class="lightbox" id="lightbox" hidden>
+        <button id="close-lightbox" aria-label="Закрыть">×</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
