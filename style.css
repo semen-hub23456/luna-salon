@@ -1,0 +1,232 @@
+
+/* Общие настройки */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f3ef;
+    color: #40352f;
+}
+
+/* Шапка */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 7%;
+    border-bottom: 1px solid #e8ddd5;
+}
+
+.logo {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    font-style: italic;
+    letter-spacing: 3px;
+    color: #806354;
+    text-decoration: none;
+}
+
+.header-contacts {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.header-contacts a {
+    color: #40352f;
+    text-decoration: none;
+}
+
+button,
+.services-button {
+    cursor: pointer;
+}
+
+#booking-button,
+.services-button {
+    padding: 13px 25px;
+    border: none;
+    border-radius: 3px;
+    background-color: #806354;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+#booking-button:hover,
+.services-button:hover {
+    background-color: #60483c;
+}
+
+/* Главный экран */
+.hero {
+    min-height: 570px;
+    padding: 120px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero h1 {
+    max-width: 800px;
+    font-family: Georgia, serif;
+    font-size: 48px;
+    font-weight: normal;
+    line-height: 1.2;
+    color: #806354;
+}
+
+.hero p {
+    max-width: 650px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #75665e;
+    margin-bottom: 35px;
+}
+
+/* Галерея */
+.gallery {
+    padding: 70px 7%;
+    text-align: center;
+}
+
+.gallery h2 {
+    font-family: Georgia, serif;
+    font-size: 34px;
+    font-weight: normal;
+    color: #806354;
+    margin-bottom: 40px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 1px solid #e5d9d0;
+    background-color: #fff;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+}
+
+/* Подвал */
+.footer {
+    padding: 25px;
+    text-align: center;
+    border-top: 1px solid #e8ddd5;
+    color: #75665e;
+}
+
+/* Окно записи */
+.booking-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.booking-modal[hidden],
+.lightbox[hidden] {
+    display: none;
+}
+
+.booking-content {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    padding: 40px;
+    background-color: #f8f3ef;
+    text-align: center;
+}
+
+.booking-content a {
+    display: block;
+    margin-top: 20px;
+    color: #806354;
+}
+
+.close-booking {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    border: none;
+    background: none;
+    font-size: 28px;
+}
+
+/* Увеличение фотографий */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+#close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 40px;
+}
+
+/* Адаптация под телефоны */
+@media (max-width: 600px) {
+    .header {
+        padding: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .header-contacts {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .header-contacts a {
+        font-size: 13px;
+    }
+
+    .hero {
+        min-height: 480px;
+        padding: 70px 20px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .gallery {
+        padding: 50px 20px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
