@@ -265,6 +265,8 @@ button,
     border: 1px solid #e8ddd5;
     text-align: left;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -296,6 +298,7 @@ button,
 .service-booking-button {
     display: inline-block;
     padding: 12px 24px;
+    margin-top: auto;
     border: none;
     border-radius: 3px;
     background-color: #806354;
