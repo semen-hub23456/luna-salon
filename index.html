@@ -39,14 +39,33 @@
         <section class="gallery">
             <h2>Наши работы</h2>
 
-            <div class="gallery-grid">
-                <button class="gallery-item" aria-label="Открыть фотографию 1"></button>
-                <button class="gallery-item" aria-label="Открыть фотографию 2"></button>
-                <button class="gallery-item" aria-label="Открыть фотографию 3"></button>
-                <button class="gallery-item" aria-label="Открыть фотографию 4"></button>
-                <button class="gallery-item" aria-label="Открыть фотографию 5"></button>
-                <button class="gallery-item" aria-label="Открыть фотографию 6"></button>
-            </div>
+            
+<div class="gallery-grid">
+    <button class="gallery-item" aria-label="Открыть фотографию 1">
+        <img src="images/gallery-1.jpg" alt="Женская причёска">
+    </button>
+
+    <button class="gallery-item" aria-label="Открыть фотографию 2">
+        <img src="images/gallery-2.jpg" alt="Мужская стрижка">
+    </button>
+
+    <button class="gallery-item" aria-label="Открыть фотографию 3">
+        <img src="images/gallery-3.jpg" alt="Окрашивание волос">
+    </button>
+
+    <button class="gallery-item" aria-label="Открыть фотографию 4">
+        <img src="images/gallery-4.jpg" alt="Длинные волосы">
+    </button>
+
+    <button class="gallery-item" aria-label="Открыть фотографию 5">
+        <img src="images/gallery-5.jpg" alt="Вечерняя укладка">
+    </button>
+
+    <button class="gallery-item" aria-label="Открыть фотографию 6">
+        <img src="images/gallery-6.jpg" alt="Короткая стрижка">
+    </button>
+</div>
+
         </section>
     </main>
 
@@ -69,8 +88,10 @@
 
     <!-- Увеличенная фотография -->
     <div class="lightbox" id="lightbox" hidden>
-        <button id="close-lightbox" aria-label="Закрыть">×</button>
-    </div>
+    <button id="close-lightbox" aria-label="Закрыть">×</button>
+    <img id="lightbox-image" src="" alt="Увеличенная фотография">
+</div>
+
     <button id="scroll-top" aria-label="Вернуться наверх">
     ↑
 </button>

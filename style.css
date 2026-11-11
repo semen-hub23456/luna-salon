@@ -1,4 +1,4 @@
-
+```css
 /* Общие настройки */
 * {
     box-sizing: border-box;
@@ -113,9 +113,19 @@ button,
 .gallery-item {
     width: 100%;
     aspect-ratio: 4 / 3;
+    padding: 0;
+    overflow: hidden;
     border: 1px solid #e5d9d0;
     background-color: #fff;
+    cursor: pointer;
     transition: transform 0.3s;
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .gallery-item:hover {
@@ -178,17 +188,29 @@ button,
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.92);
+}
+
+#lightbox-image {
+    display: block;
+    width: min(85vw, 1100px);
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
 }
 
 #close-lightbox {
     position: absolute;
-    top: 20px;
-    right: 30px;
+    top: 15px;
+    right: 25px;
+    z-index: 21;
     border: none;
     background: none;
     color: white;
     font-size: 40px;
+    cursor: pointer;
 }
 
 /* Адаптация под телефоны */
@@ -228,6 +250,20 @@ button,
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
+    }
+
+    .lightbox {
+        padding: 10px;
+    }
+
+    #lightbox-image {
+        max-width: 96vw;
+        max-height: 88vh;
+    }
+
+    #close-lightbox {
+        top: 8px;
+        right: 12px;
     }
 }
 
@@ -347,9 +383,4 @@ button,
     cursor: pointer;
     z-index: 5;
     display: none;
-    transition: background-color 0.3s;
-}
-
-#scroll-top:hover {
-    background-color: #60483c;
-}
+    transition:

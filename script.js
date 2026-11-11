@@ -39,16 +39,24 @@ if (bookingModal) {
     });
 }
 
+
 // Получаем элементы галереи
 const galleryItems = document.querySelectorAll(".gallery-item");
 const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightbox-image");
 const closeLightbox = document.getElementById("close-lightbox");
 
 // Открываем увеличенную фотографию
-if (lightbox) {
+if (lightbox && lightboxImage) {
     galleryItems.forEach(function (item) {
         item.addEventListener("click", function () {
-            lightbox.hidden = false;
+            const image = item.querySelector("img");
+
+            if (image) {
+                lightboxImage.src = image.src;
+                lightboxImage.alt = image.alt;
+                lightbox.hidden = false;
+            }
         });
     });
 }
@@ -57,6 +65,7 @@ if (lightbox) {
 if (closeLightbox && lightbox) {
     closeLightbox.addEventListener("click", function () {
         lightbox.hidden = true;
+        lightboxImage.src = "";
     });
 }
 
@@ -65,9 +74,11 @@ if (lightbox) {
     lightbox.addEventListener("click", function (event) {
         if (event.target === lightbox) {
             lightbox.hidden = true;
+            lightboxImage.src = "";
         }
     });
 }
+
 
 // Закрываем окна клавишей Escape
 document.addEventListener("keydown", function (event) {
