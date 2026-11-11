@@ -52,3 +52,24 @@ document.addEventListener("keydown", function (event) {
         lightbox.hidden = true;
     }
 });
+
+// Кнопка возврата наверх
+const scrollTopButton = document.getElementById("scroll-top");
+
+if (scrollTopButton) {
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 300) {
+            scrollTopButton.style.display = "block";
+        } else {
+            scrollTopButton.style.display = "none";
+        }
+    });
+
+    scrollTopButton.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+}
+
