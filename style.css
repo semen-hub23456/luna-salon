@@ -1,4 +1,4 @@
-```css
+
 /* Общие настройки */
 * {
     box-sizing: border-box;
@@ -383,4 +383,5 @@ button,
     cursor: pointer;
     z-index: 5;
     display: none;
-    transition:
+    transition: background-color 0.3s;
+}
