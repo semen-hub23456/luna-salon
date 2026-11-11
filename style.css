@@ -264,6 +264,13 @@ button,
     background-color: #fff;
     border: 1px solid #e8ddd5;
     text-align: left;
+    border-radius: 5px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(64, 53, 47, 0.08);
 }
 
 .service-card h2 {
@@ -280,10 +287,34 @@ button,
 .service-card span {
     display: block;
     margin-top: 20px;
+    margin-bottom: 20px;
     color: #806354;
     font-weight: bold;
 }
 
+/* Кнопки записи в карточках */
+.service-booking-button {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 3px;
+    background-color: #806354;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.service-booking-button:hover {
+    background-color: #60483c;
+    transform: translateY(-2px);
+}
+
+.service-booking-button:active {
+    transform: translateY(0);
+}
+
+/* Адаптация страницы услуг */
 @media (max-width: 600px) {
     .services-page {
         padding: 50px 20px;

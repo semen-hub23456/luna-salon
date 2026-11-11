@@ -4,22 +4,40 @@ const bookingButton = document.getElementById("booking-button");
 const bookingModal = document.getElementById("booking-modal");
 const closeBooking = document.getElementById("close-booking");
 
-// Открываем окно записи
-bookingButton.addEventListener("click", function () {
-    bookingModal.hidden = false;
+// Функция открытия окна записи
+function openBookingModal() {
+    if (bookingModal) {
+        bookingModal.hidden = false;
+    }
+}
+
+// Открываем окно по кнопке в шапке
+if (bookingButton) {
+    bookingButton.addEventListener("click", openBookingModal);
+}
+
+// Открываем окно по кнопкам в карточках услуг
+const serviceBookingButtons = document.querySelectorAll(".service-booking-button");
+
+serviceBookingButtons.forEach(function (button) {
+    button.addEventListener("click", openBookingModal);
 });
 
 // Закрываем окно записи по крестику
-closeBooking.addEventListener("click", function () {
-    bookingModal.hidden = true;
-});
+if (closeBooking && bookingModal) {
+    closeBooking.addEventListener("click", function () {
+        bookingModal.hidden = true;
+    });
+}
 
 // Закрываем окно записи при клике вне него
-bookingModal.addEventListener("click", function (event) {
-    if (event.target === bookingModal) {
-        bookingModal.hidden = true;
-    }
-});
+if (bookingModal) {
+    bookingModal.addEventListener("click", function (event) {
+        if (event.target === bookingModal) {
+            bookingModal.hidden = true;
+        }
+    });
+}
 
 // Получаем элементы галереи
 const galleryItems = document.querySelectorAll(".gallery-item");
@@ -27,29 +45,40 @@ const lightbox = document.getElementById("lightbox");
 const closeLightbox = document.getElementById("close-lightbox");
 
 // Открываем увеличенную фотографию
-galleryItems.forEach(function (item) {
-    item.addEventListener("click", function () {
-        lightbox.hidden = false;
+if (lightbox) {
+    galleryItems.forEach(function (item) {
+        item.addEventListener("click", function () {
+            lightbox.hidden = false;
+        });
     });
-});
+}
 
 // Закрываем галерею по крестику
-closeLightbox.addEventListener("click", function () {
-    lightbox.hidden = true;
-});
+if (closeLightbox && lightbox) {
+    closeLightbox.addEventListener("click", function () {
+        lightbox.hidden = true;
+    });
+}
 
 // Закрываем галерею при клике вне фотографии
-lightbox.addEventListener("click", function (event) {
-    if (event.target === lightbox) {
-        lightbox.hidden = true;
-    }
-});
+if (lightbox) {
+    lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+            lightbox.hidden = true;
+        }
+    });
+}
 
 // Закрываем окна клавишей Escape
 document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
-        bookingModal.hidden = true;
-        lightbox.hidden = true;
+        if (bookingModal) {
+            bookingModal.hidden = true;
+        }
+
+        if (lightbox) {
+            lightbox.hidden = true;
+        }
     }
 });
 
@@ -72,4 +101,3 @@ if (scrollTopButton) {
         });
     });
 }
-

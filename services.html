@@ -9,20 +9,21 @@
 </head>
 <body>
 
+    <!-- Шапка сайта -->
     <header class="header">
         <a href="index.html" class="logo">LUNA</a>
 
-       
-<div class="header-contacts">
-    <a href="tel:+79001234343">+7 900 123-43-43</a>
-    <button id="booking-button">Записаться</button>
-    <a href="index.html">На главную</a>
-</div>
-
+        <div class="header-contacts">
+            <a href="tel:+79001234343">+7 900 123-43-43</a>
+            <button id="booking-button">Записаться</button>
+            <a href="index.html">На главную</a>
+        </div>
     </header>
 
+    <!-- Страница услуг -->
     <main class="services-page">
         <h1>Наши услуги</h1>
+
         <p class="services-description">
             Подчеркнём твою индивидуальность и создадим образ,
             в котором ты будешь чувствовать себя прекрасно.
@@ -34,51 +35,58 @@
                 <h2>Женская стрижка</h2>
                 <p>Стрижка с учётом особенностей волос и пожеланий клиента.</p>
                 <span>Цена уточняется</span>
+                <button class="service-booking-button">Записаться</button>
             </article>
 
             <article class="service-card">
                 <h2>Мужская стрижка</h2>
                 <p>Аккуратная стрижка и создание индивидуального образа.</p>
                 <span>Цена уточняется</span>
+                <button class="service-booking-button">Записаться</button>
             </article>
 
             <article class="service-card">
                 <h2>Окрашивание</h2>
                 <p>Подбор оттенка и создание нового образа.</p>
                 <span>Цена уточняется</span>
+                <button class="service-booking-button">Записаться</button>
             </article>
 
             <article class="service-card">
                 <h2>Укладка</h2>
                 <p>Завершающий штрих для повседневного или праздничного образа.</p>
                 <span>Цена уточняется</span>
+                <button class="service-booking-button">Записаться</button>
             </article>
 
         </div>
     </main>
 
+    <!-- Подвал -->
     <footer class="footer">
         <p>© LUNA — пространство красоты</p>
     </footer>
 
+    <!-- Окно записи -->
+    <div class="booking-modal" id="booking-modal" hidden>
+        <div class="booking-content">
+            <button class="close-booking" id="close-booking">×</button>
 
-<div class="booking-modal" id="booking-modal" hidden>
-    <div class="booking-content">
-        <button class="close-booking" id="close-booking">×</button>
-        <h2>Запись в LUNA</h2>
-        <p>Свяжитесь с нами удобным способом:</p>
-        <a href="tel:+79001234343">Позвонить</a>
-        <a href="https://wa.me/7xxxxxxxxxx">WhatsApp</a>
-        <a href="https://t.me/example">Telegram</a>
+            <h2>Запись в LUNA</h2>
+            <p>Свяжитесь с нами удобным способом:</p>
+
+            <a href="tel:+79001234343">Позвонить</a>
+            <a href="https://wa.me/7xxxxxxxxxx">WhatsApp</a>
+            <a href="https://t.me/example">Telegram</a>
+        </div>
     </div>
-</div>
-<button id="scroll-top" aria-label="Вернуться наверх">
-    ↑
-</button>
 
-<script src="script.js"></script>
-</body>
-</html>
+    <!-- Кнопка возврата наверх -->
+    <button id="scroll-top" aria-label="Вернуться наверх">
+        ↑
+    </button>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
