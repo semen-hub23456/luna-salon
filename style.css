@@ -865,3 +865,73 @@ html {
         transition: none;
     }
 }
+
+/* ===== ДОПОЛНИТЕЛЬНЫЕ ЭФФЕКТЫ НАВЕДЕНИЯ ===== */
+
+/* Кнопки */
+#booking-button,
+.services-button,
+.hero-primary-button,
+.hero-secondary-button,
+.service-booking-button {
+    transition: all 0.3s ease;
+}
+
+#booking-button:hover,
+.services-button:hover,
+.hero-primary-button:hover,
+.service-booking-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(64, 53, 47, 0.18);
+}
+
+.hero-secondary-button:hover {
+    transform: translateY(-3px);
+}
+
+/* Карточки услуг */
+.service-card {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 14px 30px rgba(64, 53, 47, 0.12);
+    border-color: #cbb9aa;
+}
+
+/* Ссылки в шапке */
+.header-contacts a:not(.services-button) {
+    transition: color 0.3s ease;
+}
+
+.header-contacts a:not(.services-button):hover {
+    color: #a48673;
+}
+
+/* Логотип */
+.logo,
+.footer-logo {
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover,
+.footer-logo:hover {
+    opacity: 0.7;
+}
+
+/* Эффекты отключаются на устройствах без наведения */
+@media (hover: none) {
+    .service-card:hover,
+    #booking-button:hover,
+    .services-button:hover,
+    .hero-primary-button:hover,
+    .hero-secondary-button:hover,
+    .service-booking-button:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
