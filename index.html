@@ -21,22 +21,51 @@
 
     <main>
         <!-- Главный экран -->
-        <section class="hero">
-            <h1>Твоя красота начинается с заботы о себе.</h1>
+        
+<section class="hero">
+    <div class="hero-content">
+        <p class="hero-eyebrow">ПРОСТРАНСТВО КРАСОТЫ</p>
 
-            <p>
-                LUNA — пространство красоты и уюта, где профессиональные
-                мастера помогут создать образ, подчеркнуть индивидуальность
-                и подарить волосам новый вид.
-            </p>
+        <h1>
+            Красота — в деталях.
+            <span>Уверенность — в тебе.</span>
+        </h1>
 
-            <a href="services.html" class="services-button">
-                Наши услуги
+        <p class="hero-description">
+            Место, где забота о себе становится удовольствием.
+            Подчеркнём твою индивидуальность и поможем создать
+            образ, в котором ты будешь чувствовать себя уверенно.
+        </p>
+
+        <div class="hero-actions">
+            <a href="services.html" class="hero-primary-button">
+                Смотреть услуги
             </a>
-        </section>
+
+            <a href="#gallery" class="hero-secondary-button">
+                Наши работы
+            </a>
+        </div>
+
+        <p class="hero-note">Внимание к деталям · Забота о каждом госте</p>
+    </div>
+
+    <div class="hero-visual">
+        <img
+            src="images/gallery-1.jpg"
+            alt="Пример работы мастера LUNA"
+            fetchpriority="high"
+        >
+        <div class="hero-image-label">
+            <span> LUNA </span>
+            <p>Красота начинается с заботы о себе</p>
+        </div>
+    </div>
+</section>
+
 
         <!-- Галерея работ -->
-        <section class="gallery">
+        <section class="gallery" id="gallery"></section>
             <h2>Наши работы</h2>
 
             
@@ -75,10 +104,23 @@
     </footer>
 
     <!-- Окно записи -->
-    <div class="booking-modal" id="booking-modal" hidden>
+    <div
+    class="booking-modal"
+    id="booking-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="booking-title"
+    hidden
+>
         <div class="booking-content">
-            <button class="close-booking" id="close-booking">×</button>
-            <h2>Запись в LUNA</h2>
+            <button
+    class="close-booking"
+    id="close-booking"
+    aria-label="Закрыть окно записи"
+>
+    ×
+</button>
+            <h2 id="booking-title">Запись в LUNA</h2> 
             <p>Свяжитесь с нами удобным способом:</p>
             <a href="tel:+79001234343">Позвонить</a>
             <a href="https://wa.me/7xxxxxxxxxx">WhatsApp</a>
@@ -87,7 +129,15 @@
     </div>
 
     <!-- Увеличенная фотография -->
-    <div class="lightbox" id="lightbox" hidden>
+    <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Галерея фотографий"
+    tabindex="-1"
+    hidden
+>
     <button id="close-lightbox" aria-label="Закрыть">×</button>
 
     <button id="prev-photo" class="gallery-arrow" aria-label="Предыдущее фото">

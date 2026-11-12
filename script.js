@@ -1,59 +1,111 @@
 
+// ==========================================
+// LUNA — ОСНОВНОЙ JAVASCRIPT
+// ==========================================
+
+// Общие настройки
+let previouslyFocusedElement = null;
+let previousBodyOverflow = "";
+
 // Получаем элементы окна записи
 const bookingButton = document.getElementById("booking-button");
 const bookingModal = document.getElementById("booking-modal");
 const closeBooking = document.getElementById("close-booking");
 
-// Функция открытия окна записи
+// Получаем элементы галереи
+const galleryItems = document.querySelectorAll(".gallery-item");
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightbox-image");
+const closeLightbox = document.getElementById("close-lightbox");
+const prevPhoto = document.getElementById("prev-photo");
+const nextPhoto = document.getElementById("next-photo");
+const photoCounter = document.getElementById("photo-counter");
+
+// Получаем кнопку возврата наверх
+const scrollTopButton = document.getElementById("scroll-top");
+
+let currentPhotoIndex = 0;
+let touchStartX = 0;
+
+
+// ==========================================
+// УПРАВЛЕНИЕ ПРОКРУТКОЙ СТРАНИЦЫ
+// ==========================================
+
+function lockPageScroll() {
+    previousBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+}
+
+function unlockPageScroll() {
+    document.body.style.overflow = previousBodyOverflow;
+}
+
+
+// ==========================================
+// УПРАВЛЕНИЕ ОКНОМ ЗАПИСИ
+// ==========================================
+
 function openBookingModal() {
-    if (bookingModal) {
-        bookingModal.hidden = false;
+    if (!bookingModal) return;
+
+    // Закрываем галерею, если она открыта
+    if (lightbox && !lightbox.hidden) {
+        closeGallery(false);
+    }
+
+    previouslyFocusedElement = document.activeElement;
+
+    bookingModal.hidden = false;
+    lockPageScroll();
+
+    if (closeBooking) {
+        closeBooking.focus();
     }
 }
 
-// Открываем окно по кнопке в шапке
+function closeBookingModal(restoreFocus = true) {
+    if (!bookingModal || bookingModal.hidden) return;
+
+    bookingModal.hidden = true;
+    unlockPageScroll();
+
+    if (restoreFocus && previouslyFocusedElement) {
+        previouslyFocusedElement.focus();
+    }
+}
+
 if (bookingButton) {
     bookingButton.addEventListener("click", openBookingModal);
 }
 
-// Открываем окно по кнопкам в карточках услуг
-const serviceBookingButtons = document.querySelectorAll(".service-booking-button");
+const serviceBookingButtons = document.querySelectorAll(
+    ".service-booking-button"
+);
 
 serviceBookingButtons.forEach(function (button) {
     button.addEventListener("click", openBookingModal);
 });
 
-// Закрываем окно записи по крестику
-if (closeBooking && bookingModal) {
+if (closeBooking) {
     closeBooking.addEventListener("click", function () {
-        bookingModal.hidden = true;
+        closeBookingModal();
     });
 }
 
-// Закрываем окно записи при клике вне него
 if (bookingModal) {
     bookingModal.addEventListener("click", function (event) {
         if (event.target === bookingModal) {
-            bookingModal.hidden = true;
+            closeBookingModal();
         }
     });
 }
 
 
+// ==========================================
 // ГАЛЕРЕЯ ФОТОГРАФИЙ
+// ==========================================
 
-const galleryItems = document.querySelectorAll(".gallery-item");
-const lightbox = document.getElementById("lightbox");
-const lightboxImage = document.getElementById("lightbox-image");
-const closeLightbox = document.getElementById("close-lightbox");
-
-const prevPhoto = document.getElementById("prev-photo");
-const nextPhoto = document.getElementById("next-photo");
-const photoCounter = document.getElementById("photo-counter");
-
-let currentPhotoIndex = 0;
-
-// Показываем фотографию
 function showPhoto(index) {
     if (!lightboxImage || galleryItems.length === 0) return;
 
@@ -70,27 +122,70 @@ function showPhoto(index) {
 
     const image = galleryItems[index].querySelector("img");
 
-    if (image) {
-        lightboxImage.style.opacity = "0";
+    if (!image) return;
 
-        setTimeout(function () {
-            lightboxImage.src = image.src;
-            lightboxImage.alt = image.alt;
+    // Плавно скрываем старую фотографию
+    lightboxImage.style.opacity = "0";
+
+    // Обновляем изображение
+    lightboxImage.onload = function () {
+        if (currentPhotoIndex === index) {
             lightboxImage.style.opacity = "1";
-        }, 150);
-    }
+        }
+    };
 
+    lightboxImage.onerror = function () {
+        lightboxImage.alt = "Не удалось загрузить фотографию: " + image.alt;
+        lightboxImage.style.opacity = "1";
+        console.warn("Не удалось загрузить изображение:", image.src);
+    };
+
+    lightboxImage.alt = image.alt;
+    lightboxImage.src = image.currentSrc || image.src;
+
+    // Обновляем счётчик
     if (photoCounter) {
         photoCounter.textContent =
             (currentPhotoIndex + 1) + " / " + galleryItems.length;
     }
 }
 
-// Открываем фотографию
+function openGallery(index) {
+    if (!lightbox) return;
+
+    previouslyFocusedElement = document.activeElement;
+
+    showPhoto(index);
+    lightbox.hidden = false;
+    lockPageScroll();
+
+    if (closeLightbox) {
+        closeLightbox.focus();
+    }
+}
+
+function closeGallery(restoreFocus = true) {
+    if (!lightbox || lightbox.hidden) return;
+
+    lightbox.hidden = true;
+
+    if (lightboxImage) {
+        lightboxImage.onload = null;
+        lightboxImage.onerror = null;
+        lightboxImage.removeAttribute("src");
+    }
+
+    unlockPageScroll();
+
+    if (restoreFocus && previouslyFocusedElement) {
+        previouslyFocusedElement.focus();
+    }
+}
+
+// Открытие фотографий
 galleryItems.forEach(function (item, index) {
     item.addEventListener("click", function () {
-        showPhoto(index);
-        lightbox.hidden = false;
+        openGallery(index);
     });
 });
 
@@ -108,22 +203,14 @@ if (prevPhoto) {
     });
 }
 
-// Закрываем галерею
-function closeGallery() {
-    if (lightbox) {
-        lightbox.hidden = true;
-    }
-
-    if (lightboxImage) {
-        lightboxImage.src = "";
-    }
-}
-
+// Закрытие по крестику
 if (closeLightbox) {
-    closeLightbox.addEventListener("click", closeGallery);
+    closeLightbox.addEventListener("click", function () {
+        closeGallery();
+    });
 }
 
-// Закрытие при клике вне фотографии
+// Закрытие по нажатию на фон
 if (lightbox) {
     lightbox.addEventListener("click", function (event) {
         if (event.target === lightbox) {
@@ -132,37 +219,102 @@ if (lightbox) {
     });
 }
 
-// Переключение клавишами
+
+// ==========================================
+// КЛАВИАТУРА
+// ==========================================
+
+function getFocusableElements(container) {
+    if (!container) return [];
+
+    return Array.from(
+        container.querySelectorAll(
+            'a[href], button:not([disabled]), input:not([disabled]), ' +
+            'select:not([disabled]), textarea:not([disabled]), ' +
+            '[tabindex]:not([tabindex="-1"])'
+        )
+    ).filter(function (element) {
+        return element.offsetParent !== null;
+    });
+}
+
 document.addEventListener("keydown", function (event) {
-    if (!lightbox || lightbox.hidden) return;
 
-    if (event.key === "ArrowRight") {
-        showPhoto(currentPhotoIndex + 1);
-    }
-
-    if (event.key === "ArrowLeft") {
-        showPhoto(currentPhotoIndex - 1);
-    }
-
+    // Закрытие активного окна по Escape
     if (event.key === "Escape") {
-        closeGallery();
+        if (lightbox && !lightbox.hidden) {
+            closeGallery();
+            return;
+        }
+
+        if (bookingModal && !bookingModal.hidden) {
+            closeBookingModal();
+            return;
+        }
+    }
+
+    // Переключение фотографий
+    if (lightbox && !lightbox.hidden) {
+
+        if (event.key === "ArrowRight") {
+            event.preventDefault();
+            showPhoto(currentPhotoIndex + 1);
+        }
+
+        if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            showPhoto(currentPhotoIndex - 1);
+        }
+    }
+
+    // Удерживаем Tab внутри открытого окна
+    const activeDialog =
+        lightbox && !lightbox.hidden
+            ? lightbox
+            : bookingModal && !bookingModal.hidden
+                ? bookingModal
+                : null;
+
+    if (activeDialog && event.key === "Tab") {
+        const focusableElements = getFocusableElements(activeDialog);
+
+        if (focusableElements.length === 0) {
+            event.preventDefault();
+            return;
+        }
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+        } else if (
+            !event.shiftKey &&
+            document.activeElement === lastElement
+        ) {
+            event.preventDefault();
+            firstElement.focus();
+        }
     }
 });
 
-// Листание пальцем на телефоне
-let touchStartX = 0;
-let touchEndX = 0;
+
+// ==========================================
+// ПЕРЕКЛЮЧЕНИЕ СВАЙПОМ НА ТЕЛЕФОНЕ
+// ==========================================
 
 if (lightbox) {
+
     lightbox.addEventListener("touchstart", function (event) {
         touchStartX = event.changedTouches[0].screenX;
-    });
+    }, { passive: true });
 
     lightbox.addEventListener("touchend", function (event) {
-        touchEndX = event.changedTouches[0].screenX;
-
+        const touchEndX = event.changedTouches[0].screenX;
         const difference = touchStartX - touchEndX;
 
+        // Игнорируем короткие движения
         if (Math.abs(difference) < 50) return;
 
         if (difference > 0) {
@@ -170,34 +322,28 @@ if (lightbox) {
         } else {
             showPhoto(currentPhotoIndex - 1);
         }
-    });
+    }, { passive: true });
 }
 
 
-// Закрываем окна клавишей Escape
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-        if (bookingModal) {
-            bookingModal.hidden = true;
-        }
+// ==========================================
+// КНОПКА ВОЗВРАТА НАВЕРХ
+// ==========================================
 
-        if (lightbox) {
-            lightbox.hidden = true;
-        }
-    }
-});
+function updateScrollTopButton() {
+    if (!scrollTopButton) return;
 
-// Кнопка возврата наверх
-const scrollTopButton = document.getElementById("scroll-top");
+    scrollTopButton.style.display =
+        window.scrollY > 300 ? "block" : "none";
+}
 
 if (scrollTopButton) {
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 300) {
-            scrollTopButton.style.display = "block";
-        } else {
-            scrollTopButton.style.display = "none";
-        }
+
+    window.addEventListener("scroll", updateScrollTopButton, {
+        passive: true
     });
+
+    updateScrollTopButton();
 
     scrollTopButton.addEventListener("click", function () {
         window.scrollTo({
@@ -206,3 +352,4 @@ if (scrollTopButton) {
         });
     });
 }
+
