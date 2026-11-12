@@ -385,3 +385,69 @@ button,
     display: none;
     transition: background-color 0.3s;
 }
+
+/* Стрелки галереи */
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 60px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    transition: background 0.3s;
+    z-index: 21;
+}
+
+.gallery-arrow:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+#prev-photo {
+    left: 25px;
+}
+
+#next-photo {
+    right: 25px;
+}
+
+/* Счётчик фотографий */
+.photo-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 14px;
+}
+
+/* Анимация фотографии */
+#lightbox-image {
+    transition: opacity 0.15s ease;
+}
+
+/* Мобильная версия */
+@media (max-width: 600px) {
+    .gallery-arrow {
+        width: 38px;
+        height: 48px;
+        font-size: 20px;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    #prev-photo {
+        left: 8px;
+    }
+
+    #next-photo {
+        right: 8px;
+    }
+
+    .photo-counter {
+        bottom: 12px;
+    }
+}
