@@ -839,3 +839,29 @@ html {
         margin-top: 35px;
     }
 }
+
+/* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Учитываем настройки пользователя */
+
+@media (prefers-reduced-motion: reduce) {
+    .fade-in,
+    .fade-in.visible {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

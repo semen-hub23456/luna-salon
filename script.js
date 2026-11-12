@@ -353,3 +353,39 @@ if (scrollTopButton) {
     });
 }
 
+// ==========================================
+// АНИМАЦИЯ ПОЯВЛЕНИЯ БЛОКОВ
+// ==========================================
+
+const animatedElements = document.querySelectorAll(
+    ".hero-content, .hero-visual, .gallery, .service-card, .footer"
+);
+
+if ("IntersectionObserver" in window) {
+
+    const animationObserver = new IntersectionObserver(
+        function (entries, observer) {
+
+            entries.forEach(function (entry) {
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+
+                    observer.unobserve(entry.target);
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.15
+        }
+    );
+
+    animatedElements.forEach(function (element) {
+        element.classList.add("fade-in");
+        animationObserver.observe(element);
+    });
+
+}
+
